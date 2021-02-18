@@ -29,7 +29,7 @@ const createApp = (middlwares = [], router = null) => {
   app.use('/api', router)
 
   // Serve client app
-  app.get('*', async(req, res, next) => {
+  app.use('*', async(req, res, next) => {
     res.sendFile('index.html')
   })
 
