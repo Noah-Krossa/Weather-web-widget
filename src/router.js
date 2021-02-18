@@ -1,4 +1,5 @@
-const {Router} = require('express')
+const { Router } = require('express')
+
 const APIRouter = Router()
 
 APIRouter.get('/test', (req, res) => {
