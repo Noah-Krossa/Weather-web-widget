@@ -12,13 +12,8 @@ const SOPORTED_CITIES = [
   'tokyo',
 ]
 
-const WeatherSchema = new Schema({
-  city: {
-    type: String,
-    required: true,
-    enum: SOPORTED_CITIES,
-  },
-
+const StateSchema = new Schema({
+  date: Date,
   temperature: String,
   windSpeed: String,
   dewPoint: String,
@@ -26,4 +21,14 @@ const WeatherSchema = new Schema({
   visibilityDistance: String,
   atmospherePressure: String,
 })
+
+const WeatherSchema = new Schema({
+  city: {
+    type: String,
+    required: true,
+    enum: SOPORTED_CITIES,
+  },
+  weatherHistory: [StateSchema],
+})
+
 module.exports = model('weathers', WeatherSchema)
