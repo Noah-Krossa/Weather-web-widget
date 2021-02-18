@@ -12,6 +12,7 @@ try {
 
   /** Connect to mongodb */
   connectToMongodb(process.env.MONGODB_URI)
+  
 } catch(e) {
   console.log(e)
 }
