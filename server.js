@@ -6,17 +6,19 @@ try {
   const app = createApp([], APIRouter)
   const PORT = app.get('port')
   /** INITIALIZE SERVER */
-  app.listen(PORT, () => {
+  const server = app.listen(PORT, () => {
     console.info(`Express application running in: http://localhost:${PORT}`)
   })
+  // Exporting app server
+  module.exports = server
 
   /** Separate test context to dev/prod contexts
    * The reason behind this is for not alterate db when run test
    */
-  const MONGODB_URI =
-    process.env.NODE_ENV === 'development'
-      ? process.env.MONGODB_URI
-      : process.env.MONGODB_TEST_URI
+  let MONGODB_URI
+  if (process.env.NODE_ENV === 'development')
+    MONGODB_URI = process.env.MONGODB_URI
+  else MONGODB_URI = process.env.MONGODB_URI
 
   /** Connect to mongodb */
   connectToMongodb(MONGODB_URI)
