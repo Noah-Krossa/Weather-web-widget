@@ -1,6 +1,6 @@
 # Weather web widget
 
-Weather web widget is powered by <a href="">OpenWeather API</a> to fill our backend DB and serve to client app, data related with selected city in a pretty widget.
+Weather web widget is powered by <a href="https://www.weatherapi.com/">WeatherAPI</a> to fill our backend DB and serve to client app, data related with selected city in a pretty widget.
 To keep it simple it limited the number of cities to:
 - New York
 - London
