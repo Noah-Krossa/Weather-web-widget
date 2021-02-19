@@ -1,16 +1,5 @@
 const { Schema, model } = require('mongoose')
-
-const SOPORTED_CITIES = [
-  'New York',
-  'London',
-  'Manchester',
-  'Madrid',
-  'Barcelona',
-  'Berlin',
-  'Istambul',
-  'paris',
-  'tokyo',
-]
+const { cities } = require('./config')
 
 const StateSchema = new Schema({
   date: Date,
@@ -28,7 +17,8 @@ const WeatherSchema = new Schema({
   city: {
     type: String,
     required: true,
-    enum: SOPORTED_CITIES,
+    enum: cities,
+    lastUpdate: Date,
   },
   weatherHistory: [StateSchema],
 })
