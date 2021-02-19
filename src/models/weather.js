@@ -15,7 +15,9 @@ const SOPORTED_CITIES = [
 const StateSchema = new Schema({
   date: Date,
   temperature: String,
+  feelsLike: String,
   windSpeed: String,
+  windDirection: String,
   dewPoint: String,
   humidity: String,
   visibilityDistance: String,
