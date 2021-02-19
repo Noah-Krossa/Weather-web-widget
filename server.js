@@ -1,9 +1,11 @@
+const cors = require('cors')
+const helmet = require('helmet')
 const { createApp } = require('./src/app')
 const { connectToMongodb } = require('./src/db')
 const APIRouter = require('./src/router')
 
 try {
-  const app = createApp([], APIRouter)
+  const app = createApp([cors(), helmet()], APIRouter)
   const PORT = app.get('port')
   /** INITIALIZE SERVER */
   const server = app.listen(PORT, () => {
