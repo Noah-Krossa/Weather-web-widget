@@ -1,6 +1,6 @@
 const express = require('express')
 const logger = require('morgan')
-const { join } = require('path')
+const { resolve } = require('path')
 require('dotenv').config()
 
 /**
@@ -13,7 +13,7 @@ const createApp = (middlwares = [], router = null) => {
 
   // Settings
   app.set('port', process.env.PORT)
-  app.use(express.static(join(__dirname, 'statics')))
+  app.use(express.static(resolve(__dirname, 'statics')))
 
   // Default middlewares
   app.use(logger('dev'))
@@ -29,8 +29,8 @@ const createApp = (middlwares = [], router = null) => {
   app.use('/api', router)
 
   // Serve client app
-  app.use('*', async (req, res, next) => {
-    res.sendFile('index.html')
+  app.get('/*', async (req, res, next) => {
+    res.sendFile(resolve(__dirname, 'statics', 'index.html'))
   })
 
   return app
