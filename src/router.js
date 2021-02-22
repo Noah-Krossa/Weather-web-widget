@@ -4,6 +4,7 @@ const WeatherORM = require('./models/orm')
 const theWeatherManager = new WeatherORM()
 
 const APIRouter = Router()
+// eslint-disable-next-line consistent-return
 APIRouter.get('/city', async (req, res, next) => {
   const { q } = req.query
   try {
@@ -17,8 +18,7 @@ APIRouter.get('/city', async (req, res, next) => {
     const result = await theWeatherManager.getWeatherOf(q)
     res.json(result)
   } catch (e) {
-    console.log(e.message)
-    return next(e)
+    return next(e.message)
   }
 })
 
