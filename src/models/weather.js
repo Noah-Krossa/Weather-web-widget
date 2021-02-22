@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose')
+const moment = require('moment')
 const { cities } = require('./config')
 
 const StateSchema = new Schema({
@@ -9,6 +10,7 @@ const StateSchema = new Schema({
   windDirection: String,
   dewPoint: String,
   humidity: String,
+  condition: String,
   visibilityDistance: String,
   atmospherePressure: String,
 })
@@ -18,9 +20,14 @@ const WeatherSchema = new Schema({
     type: String,
     required: true,
     enum: cities,
-    lastUpdate: Date,
   },
+  lastUpdate: Date,
   weatherHistory: [StateSchema],
+})
+
+WeatherSchema.pre('save', (done) => {
+  this.lastUpdate = moment().format('YYYY-MM-DD')
+  done()
 })
 
 module.exports = model('weathers', WeatherSchema)
