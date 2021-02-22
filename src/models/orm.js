@@ -9,12 +9,11 @@ class WeatherORM {
       throw new Error(`${city}is not soported yet`)
     }
 
-    const foundWeather = await WeatherModel.find({ city }).exec()
-
+    const foundWeather = await WeatherModel.findOne({ city }).exec()
     // If not found weather of city, generate a city info
-    if (foundWeather.length < 1) {
+    if (!foundWeather) {
       console.log(`cannot found weather data of ${city}`)
-      const result = await this.getWeatherOf(city)
+      const result = await this.addWeather(city)
       return result
     }
 
@@ -40,8 +39,8 @@ class WeatherORM {
 
   async addWeather(city) {
     const data = await WeatherAPIService(city)
-    const result = await new WeatherModel({ city, weatherHistory: data })
-    result.save()
+    let result = await new WeatherModel({ city, weatherHistory: data })
+    result = await result.save()
     return result
   }
 }
