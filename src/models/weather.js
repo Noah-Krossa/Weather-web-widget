@@ -26,7 +26,8 @@ const WeatherSchema = new Schema({
 })
 
 WeatherSchema.pre('save', (done) => {
-  this.lastUpdate = moment().format('YYYY-MM-DD')
+  this.lastUpdate = moment().format('YYYY-MM-DD, ll')
+  console.log(this.lastUpdate)
   done()
 })
 
