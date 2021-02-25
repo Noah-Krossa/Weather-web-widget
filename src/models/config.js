@@ -1,6 +1,6 @@
 module.exports = {
   cities: [
-    'newyork',
+    'new york',
     'london',
     'manchester',
     'madrid',

@@ -22,4 +22,13 @@ APIRouter.get('/city', async (req, res, next) => {
   }
 })
 
+APIRouter.get('/all', async (req, res, next) => {
+  try {
+    const result = await theWeatherManager.getAllWeather()
+    res.json(result)
+  } catch (e) {
+    return next(e)
+  }
+})
+
 module.exports = APIRouter

@@ -1,3 +1,5 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-await-in-loop */
 const moment = require('moment')
 const WeatherModel = require('./weather')
 const { cities } = require('./config')
@@ -41,6 +43,16 @@ class WeatherORM {
     const data = await WeatherAPIService(city)
     let result = await new WeatherModel({ city, weatherHistory: data })
     result = await result.save()
+    return result
+  }
+
+  async getAllWeather() {
+    const result = []
+
+    for (let i = 0; i < cities.length; i++) {
+      const r = await this.getWeatherOf(cities[i])
+      result.push(r)
+    }
     return result
   }
 }
