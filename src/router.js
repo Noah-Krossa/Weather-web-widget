@@ -22,6 +22,7 @@ APIRouter.get('/city', async (req, res, next) => {
   }
 })
 
+// eslint-disable-next-line consistent-return
 APIRouter.get('/all', async (req, res, next) => {
   try {
     const result = await theWeatherManager.getAllWeather()

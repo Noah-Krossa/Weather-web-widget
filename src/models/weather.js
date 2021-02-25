@@ -27,9 +27,9 @@ const WeatherSchema = new Schema({
 
 // eslint-disable-next-line func-names
 WeatherSchema.pre('save', function (done) {
-  if (this.isModified()) {
-    this.lastUpdate = moment().format('YYYY-MM-DD')
-  }
+  this.lastUpdate = moment().format('YYYY-MM-DD')
+
+  console.log('updating last update date')
   done()
 })
 

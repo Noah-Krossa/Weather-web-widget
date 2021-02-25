@@ -22,15 +22,21 @@ class WeatherORM {
     // Comparing current date and las update
     // IF info is obsolete, update the info
     const current = moment().unix()
-    const lastUpdate = moment(foundWeather.lastUpdate, 'YYYY-MM-DD').unix()
-    if (moment(lastUpdate).add(1, 'day').unix() >= current) {
+    const lastUpdate = moment(foundWeather.lastUpdate, 'YYYY-MM-DD')
+      .add(1, 'day')
+      .unix()
+    console.log(`current ${current}`)
+    console.log(`last update ${lastUpdate}`)
+
+    if (lastUpdate < current) {
       console.log(`found wather data of${city}, but need to update`)
       const data = await WeatherAPIService(city)
-      const result = await WeatherModel.findByIdAndUpdate(
+      const result = await WeatherModel.findOneAndUpdate(
         { city },
         { $set: { weatherHistory: data } },
         { new: true } // Return the updated document
       )
+      await result.save()
       return result
     }
 
