@@ -5,7 +5,13 @@ const { connectToMongodb } = require('./src/db')
 const APIRouter = require('./src/router')
 
 try {
-  const app = createApp([cors(), helmet()], APIRouter)
+  // if it's development, omite securety middlewares
+  const middleares = []
+  if (process.env.NODE_ENV !== 'development') {
+    middleares.push(cors())
+    middleares.push(helmet())
+  }
+  const app = createApp(middleares, APIRouter)
   const PORT = app.get('port')
   /** INITIALIZE SERVER */
   const server = app.listen(PORT, () => {
